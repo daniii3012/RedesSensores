@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
 
         let weatherDates = []
         date.forEach((res) => {
-          let jsdate = res
-          weatherDates.push(jsdate.toDate())
+          let jsdate = new Date(res.toMillis())
+          weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit' }))
         })
 
         //console.log(weatherDates)
@@ -57,7 +57,11 @@ export class HomeComponent implements OnInit {
             },
             scales: {
               xAxes: [{
-                display: true
+                display: true,
+                ticks: {
+                  autoSkip: true,
+                  maxTicksLimit: 7
+                }
               }],
               yAxes: [{
                 display: true,
