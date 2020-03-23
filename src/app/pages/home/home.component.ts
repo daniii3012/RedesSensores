@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SensorService } from '../../services/sensor.service';
+import { Chart } from 'chart.js'
 
 @Component({
   selector: 'app-home',
@@ -8,8 +9,7 @@ import { SensorService } from '../../services/sensor.service';
 })
 export class HomeComponent implements OnInit {
 
-  dht22Data: any;
-  mq135Data: any;
+  chart = [];
 
   data: any;
 
@@ -18,28 +18,68 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.data = this.sensorService.getData();
-    //this.getDHT22Data();
-    //this.getMQ135Data();
-  }
+    this.sensorService.getData().subscribe(
+      data_sensor => {
+        let temp = data_sensor.map(res => res.temp)
+        let humd = data_sensor.map(res => res.humd)
+        let date = data_sensor.map(res => res.time)
 
-  /*
-  getDHT22Data(){
-    this.sensorService.getDHT22Data('data').subscribe(
-      data => {
-        this.dht22Data = data
-        //console.log(this.dht22Data)
-      }
-    )
-  }
+        let weatherDates = []
+        date.forEach((res) => {
+          let jsdate = res
+          weatherDates.push(jsdate.toDate())
+        })
 
-  getMQ135Data(){
-    this.sensorService.getMQ135Data('data').subscribe(
-      data => {
-        this.mq135Data = data
+        //console.log(weatherDates)
+
+        this.chart = new Chart('canvas', {
+          type: 'line',
+          data: {
+            labels: weatherDates,
+            datasets: [
+              {
+                data: temp,
+                yAxisID: 'temp',
+                borderColor: '#e6b41e',
+                fill: false
+              },
+              {
+                data: humd,
+                yAxisID: 'humd',
+                borderColor: '#148ac9',
+                fill: false
+              }
+            ]
+          },
+          options: {
+            legend: {
+              display: false
+            },
+            scales: {
+              xAxes: [{
+                display: true
+              }],
+              yAxes: [{
+                display: true,
+                id: 'temp',
+                ticks: {
+                  beginAtZero: true,
+                  max: 50
+                }
+              },
+              {
+                display: true,
+                id: 'humd',
+                ticks: {
+                  beginAtZero: true,
+                  max: 100
+                }
+              }]
+            }
+          }
+        })
       }
     );
   }
-  */
 
 }

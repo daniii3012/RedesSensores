@@ -6,11 +6,13 @@ import { environment } from '../environments/environment.prod';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
+import { ServiceWorkerModule } from '@angular/service-worker';
+
+import { SensorService } from './services/sensor.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,7 @@ import { environment } from '../environments/environment';
     AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [SensorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
