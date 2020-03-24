@@ -10,9 +10,13 @@ import { Chart } from 'chart.js'
 export class HomeComponent implements OnInit {
 
   chart = [];
+  newNumbersT = [];
+  newNumbersH = [];
+  newDates = [];
 
   data: any;
-
+  i=0;
+  j=0;
   constructor(
     private sensorService: SensorService
   ) { }
@@ -86,4 +90,49 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  changeDataLess(){
+    this.i=0;
+    this.j=0;
+    this.newNumbersH=[];
+    this.newNumbersT=[];
+    this.newDates=[];
+    console.log("L: ", this.chart.data.datasets[0].data.length);
+    while (this.i<(this.chart.data.datasets[0].data.length)/2){
+      this.newNumbersH.push(this.chart.data.datasets[0].data[this.j]);
+      this.newNumbersT.push(this.chart.data.datasets[1].data[this.j]);
+      this.newDates.push(this.chart.data.labels[this.j]);
+      this.j=this.j+2;
+      this.i++;
+    }
+    
+    this.chart.data.datasets[0].data=this.newNumbersH;
+    this.chart.data.datasets[1].data=this.newNumbersT;
+    this.chart.data.labels=this.newDates;
+    
+    
+    this.chart.update();
+    
+
+    
+    //LINEA SAGRADA DE CODIGO
+    //console.log("Prueba: ", this.chart.data.datasets[0].data[0]);
+  }
+
+  changeDataMore(){
+    if(this.chart.data.datasets[0].data.length>200&&this.chart.data.datasets[0].data.length<500){
+      console.log("2");
+    }
+    if(this.chart.data.datasets[0].data.length>100&&this.chart.data.datasets[0].data.length<200){
+      console.log("3");
+    }
+    if(this.chart.data.datasets[0].data.length>50&&this.chart.data.datasets[0].data.length<100){
+      console.log("4");
+    }
+    if(this.chart.data.datasets[0].data.length>25&&this.chart.data.datasets[0].data.length<50){
+      console.log("5");
+    }
+    if(this.chart.data.datasets[0].data.length>12&&this.chart.data.datasets[0].data.length<25){
+      console.log("6");
+    }
+  }
 }
