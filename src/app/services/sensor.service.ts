@@ -16,7 +16,7 @@ export class SensorService {
   sensorDHT22: Observable<any[]>;
 
   constructor(private db: AngularFirestore) {
-    this.sensorDHT22Collection = this.db.collection('dht22', order => order.orderBy("time", "asc").limit(2016));
+    this.sensorDHT22Collection = this.db.collection('dht22', order => order.orderBy("time", "asc").limit(100/*2016*/));
   }
 
   
