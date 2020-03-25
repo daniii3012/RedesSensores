@@ -9,7 +9,13 @@ import { Chart } from 'chart.js';
 })
 export class DayChartComponent implements OnInit {
 
-  dayChart = [];
+  dayChart = new Chart('dayChart', {});
+  maxTemp = 0;
+  maxHumd = 0;
+  minTemp = 0;
+  minHumd = 0;
+  data: any;
+  i=0;
 
   constructor(private firebaseService: FirebaseService) { }
 
@@ -82,5 +88,50 @@ export class DayChartComponent implements OnInit {
       }
     );
   }
+  findValues(){
+    this.findMaxValueTemp();
+    this.findMaxValueHumd();
+    this.findMinValueTemp();
+    this.findMinValueHumd();
+  }
 
+  findMaxValueTemp(){
+    this.maxTemp = this.dayChart.data.datasets[0].data[0];
+    this.i=0;
+    for(this.i=1;this.i < this.dayChart.data.datasets[0].data.length;this.i++){
+      if(this.dayChart.data.datasets[0].data[this.i] > this.maxTemp){
+	      this.maxTemp = this.dayChart.data.datasets[0].data[this.i];
+	    }
+    }
+  }
+
+  findMaxValueHumd(){
+    this.maxHumd = this.dayChart.data.datasets[1].data[0];
+    this.i=0;
+    for(this.i=1;this.i < this.dayChart.data.datasets[0].data.length;this.i++){
+      if(this.dayChart.data.datasets[0].data[this.i] > this.maxHumd){
+	      this.maxHumd = this.dayChart.data.datasets[0].data[this.i];
+	    }
+    }
+  }
+
+  findMinValueTemp(){
+    this.minTemp = this.dayChart.data.datasets[0].data[0];
+    this.i=0;
+    for(this.i=1;this.i < this.dayChart.data.datasets[0].data.length;this.i++){
+      if(this.dayChart.data.datasets[0].data[this.i] < this.minTemp){
+	      this.minTemp = this.dayChart.data.datasets[0].data[this.i];
+	    }
+    }
+  }
+
+  findMinValueHumd(){
+    this.minHumd = this.dayChart.data.datasets[1].data[0];
+    this.i=0;
+    for(this.i=1;this.i < this.dayChart.data.datasets[0].data.length;this.i++){
+      if(this.dayChart.data.datasets[0].data[this.i] < this.minHumd){
+	      this.minHumd = this.dayChart.data.datasets[0].data[this.i];
+	    }
+    }
+  }
 }
