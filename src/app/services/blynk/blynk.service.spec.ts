@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SensorService } from './sensor.service';
+import { BlynkService } from './blynk.service';
 
-describe('SensorService', () => {
+describe('BlynkService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: SensorService = TestBed.get(SensorService);
+    const service: BlynkService = TestBed.get(BlynkService);
     expect(service).toBeTruthy();
   });
 });

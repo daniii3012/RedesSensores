@@ -1,11 +1,14 @@
-<div id="botones">
-    <button class="btn btn-info" (click)="changeDataLess()">
-        - Datos
-    </button>
-    <button class="btn btn-info" (click)="changeDataMore()">
-        + Datos
-    </button>
+<!-- Componente Hour Chart (Muestra 24 datos, cada 2.5 mins) -->
+<div class="mt-3">
+    <app-hour-chart></app-hour-chart>
 </div>
-<div *ngIf="chart" class="container">
-    <canvas id="canvas">{{ chart }}</canvas>
+
+<!-- Componente Day Chart (Muestra 24 datos, cada 1 hora) -->
+<div class="mt-3">
+    <app-day-chart></app-day-chart>
+</div>
+
+<!-- Componente Week Chart (Muestra 7 datos, cada 24 horas) -->
+<div class="mt-3 mb-3">
+    <app-week-chart></app-week-chart>
 </div>
