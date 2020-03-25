@@ -10,13 +10,12 @@ import { Chart } from 'chart.js';
 export class HourChartComponent implements OnInit {
 
   hourChart = new Chart('hourChart', {});
-  newNumbersT = [];
-  newNumbersH = [];
-  newDates = [];
-
+  maxTemp = 0;
+  maxHumd = 0;
+  minTemp = 0;
+  minHumd = 0;
   data: any;
-  i:number = 0;
-  j:number = 0;
+  i=0;
 
   constructor(private firebaseService: FirebaseService) { }
 
@@ -90,50 +89,50 @@ export class HourChartComponent implements OnInit {
     );
   }
 
-  changeDataLess(){
+  findValues(){
+    this.findMaxValueTemp();
+    this.findMaxValueHumd();
+    this.findMinValueTemp();
+    this.findMinValueHumd();
+  }
+
+  findMaxValueTemp(){
+    this.maxTemp = this.hourChart.data.datasets[0].data[0];
     this.i=0;
-    this.j=0;
-    this.newNumbersH=[];
-    this.newNumbersT=[];
-    this.newDates=[];
-    console.log("L: ", this.hourChart.data.datasets[0].data.length);
-    while (this.i<(this.hourChart.data.datasets[0].data.length)/2){
-      this.newNumbersH.push(this.hourChart.data.datasets[0].data[this.j]);
-      this.newNumbersT.push(this.hourChart.data.datasets[1].data[this.j]);
-      this.newDates.push(this.hourChart.data.labels[this.j]);
-      this.j=this.j+2;
-      this.i++;
-    }
-    
-    this.hourChart.data.datasets[0].data=this.newNumbersH;
-    this.hourChart.data.datasets[1].data=this.newNumbersT;
-    this.hourChart.data.labels=this.newDates;
-    
-    
-    this.hourChart.update();
-    
-
-    
-    //LINEA SAGRADA DE CODIGO
-    //console.log("Prueba: ", this.chart.data.datasets[0].data[0]);
-  }
-
-  changeDataMore(){
-    if(this.hourChart.data.datasets[0].data.length>200&&this.hourChart.data.datasets[0].data.length<500){
-      console.log("2");
-    }
-    if(this.hourChart.data.datasets[0].data.length>100&&this.hourChart.data.datasets[0].data.length<200){
-      console.log("3");
-    }
-    if(this.hourChart.data.datasets[0].data.length>50&&this.hourChart.data.datasets[0].data.length<100){
-      console.log("4");
-    }
-    if(this.hourChart.data.datasets[0].data.length>25&&this.hourChart.data.datasets[0].data.length<50){
-      console.log("5");
-    }
-    if(this.hourChart.data.datasets[0].data.length>12&&this.hourChart.data.datasets[0].data.length<25){
-      console.log("6");
+    for(this.i=1;this.i < this.hourChart.data.datasets[0].data.length;this.i++){
+      if(this.hourChart.data.datasets[0].data[this.i] > this.maxTemp){
+	      this.maxTemp = this.hourChart.data.datasets[0].data[this.i];
+	    }
     }
   }
 
+  findMaxValueHumd(){
+    this.maxHumd = this.hourChart.data.datasets[1].data[0];
+    this.i=0;
+    for(this.i=1;this.i < this.hourChart.data.datasets[0].data.length;this.i++){
+      if(this.hourChart.data.datasets[0].data[this.i] > this.maxHumd){
+	      this.maxHumd = this.hourChart.data.datasets[0].data[this.i];
+	    }
+    }
+  }
+
+  findMinValueTemp(){
+    this.minTemp = this.hourChart.data.datasets[0].data[0];
+    this.i=0;
+    for(this.i=1;this.i < this.hourChart.data.datasets[0].data.length;this.i++){
+      if(this.hourChart.data.datasets[0].data[this.i] < this.minTemp){
+	      this.minTemp = this.hourChart.data.datasets[0].data[this.i];
+	    }
+    }
+  }
+
+  findMinValueHumd(){
+    this.minHumd = this.hourChart.data.datasets[1].data[0];
+    this.i=0;
+    for(this.i=1;this.i < this.hourChart.data.datasets[0].data.length;this.i++){
+      if(this.hourChart.data.datasets[0].data[this.i] < this.minHumd){
+	      this.minHumd = this.hourChart.data.datasets[0].data[this.i];
+	    }
+    }
+  }
 }
