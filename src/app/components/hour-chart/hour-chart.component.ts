@@ -9,7 +9,7 @@ import { Chart } from 'chart.js';
 })
 export class HourChartComponent implements OnInit {
 
-  hourChart = [];
+  hourChart = new Chart('hourChart', {});
   newNumbersT = [];
   newNumbersH = [];
   newDates = [];
