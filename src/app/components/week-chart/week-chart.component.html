@@ -4,6 +4,17 @@
             <h1>Ultima Semana</h1>
         </div>
         <div class="card-body">
+            <button class="btn btn-info" (click)="findValues()">Valores</button>
+            <div id="dataTemp">
+                <p>MÁXIMO VALOR REGISTRADO TEMPERATURA: {{maxTemp}}</p>
+                <p>MENOR VALOR REGISTRADO TEMPERATURA: {{minTemp}}</p>
+            </div>
+            <div id="dataHumd">
+                <p>MÁXIMO VALOR REGISTRADO HUMEDAD: {{maxHumd}}</p>
+                <p>MENOR VALOR REGISTRADO HUMEDAD: {{minHumd}}</p>
+            </div>
+        </div>
+        <div class="card-body">
             <div *ngIf="weekChart" class="container">
                 <canvas id="weekChart">{{ weekChart }}</canvas>
             </div>
