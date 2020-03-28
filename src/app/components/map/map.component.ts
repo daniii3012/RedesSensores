@@ -32,7 +32,7 @@ export class MapComponent implements OnInit {
   marker() {
     const marker = new Mapboxgl.Marker({
       draggable: false,
-      color: '#49e9e1'
+      color: '#133467'
       })
       .setLngLat([-74.0961825, 4.6357964])
       .addTo(this.map);
