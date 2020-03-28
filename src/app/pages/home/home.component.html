@@ -1,10 +1,10 @@
 <div class="container mt-3 mb-3">
     <div class="card mb-3">
         <div class="card-body">
-            <h5 class="card-title text-center">Centro de Monitoreo del Tiempo</h5>
+            <h3 class="card-title text-center">Centro de Monitoreo del Tiempo</h3>
         </div>
     </div>
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-3">
             <div class="card">
                 <div class="card-body" *ngIf="weatherNow">
@@ -32,7 +32,15 @@
         <div class="col-lg-8 col-md-8 col-sm-12 col-12">
             <div class="card">
                 <div class="card-body">
-
+                    <div class="row">
+                        <div class="col-auto">
+                            <h5 class="card-title">Ubicación</h5>
+                        </div>
+                        <div class="col text-right">
+                            <div><small><em>Bogotá D.C - Teusaquillo</em></small></div>
+                        </div>
+                    </div>
+                    <app-map></app-map>
                 </div>
             </div>
         </div>

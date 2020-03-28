@@ -20,6 +20,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { HourChartComponent } from './components/hour-chart/hour-chart.component';
 import { DayChartComponent } from './components/day-chart/day-chart.component';
 import { WeekChartComponent } from './components/week-chart/week-chart.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { WeekChartComponent } from './components/week-chart/week-chart.component
     HomeComponent,
     HourChartComponent,
     DayChartComponent,
-    WeekChartComponent
+    WeekChartComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
