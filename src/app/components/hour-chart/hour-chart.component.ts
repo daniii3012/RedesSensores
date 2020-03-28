@@ -10,26 +10,32 @@ import { Chart } from 'chart.js';
 export class HourChartComponent implements OnInit {
 
   hourChart = new Chart('hourChart', {});
-  maxTemp = 0;
-  maxHumd = 0;
-  minTemp = 0;
-  minHumd = 0;
-  data: any;
-  i=0;
+
+  maxTemp: number = 0;
+  maxHumd: number = 0;
+  minTemp: number = 0;
+  minHumd: number = 0;
+
+  minDate: any;
+  maxDate: any;
+
+  i: number = 0;
+
+  moreInfo: boolean = false;
 
   constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit() {
     this.firebaseService.getDataHour().subscribe(
       data_sensor => {
-        let temp = data_sensor.map(res => res.temp)
-        let humd = data_sensor.map(res => res.humd)
+        let temp = data_sensor.map(res => res.temp.toFixed(2))
+        let humd = data_sensor.map(res => res.humd.toFixed(2))
         let date = data_sensor.map(res => res.time)
 
         let weatherDates = []
         date.forEach((res) => {
           let jsdate = new Date(res.toMillis())
-          weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'short', day: 'numeric' }))
+          weatherDates.push(jsdate.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' }))
         })
 
         //console.log(weatherDates)
@@ -43,17 +49,29 @@ export class HourChartComponent implements OnInit {
                 data: temp,
                 yAxisID: 'temp',
                 borderColor: '#e6b41e',
-                fill: false
+                fill: true,
+                backgroundColor: '#e6b41e2a',
+                label: 'Temperatura'
               },
               {
                 data: humd,
                 yAxisID: 'humd',
                 borderColor: '#148ac9',
-                fill: false
+                fill: true,
+                backgroundColor: '#148ac92a',
+                label: 'Humedad'
               }
             ]
           },
           options: {
+            tooltips: {
+              mode: 'x'
+            },
+            elements: {
+              line: {
+                tension: 0
+              }
+            },
             legend: {
               display: false
             },
@@ -63,76 +81,88 @@ export class HourChartComponent implements OnInit {
                 ticks: {
                   autoSkip: true,
                   maxTicksLimit: 6,
-                  reverse: true
+                  reverse: true,
+                  fontSize: 12
                 }
               }],
               yAxes: [{
                 display: true,
                 id: 'temp',
                 ticks: {
-                  beginAtZero: true,
-                  max: 50
+                  suggestedMin: 10,
+                  suggestedMax: 40,
+                  fontColor: '#e6b41e'
                 }
               },
               {
                 display: true,
                 id: 'humd',
+                position: 'right',
                 ticks: {
-                  beginAtZero: true,
-                  max: 100
+                  suggestedMin: 20,
+                  suggestedMax: 80,
+                  fontColor: '#148ac9'
                 }
               }]
             }
           }
-        })
+        });
+
+        this.findDates();
       }
     );
   }
 
-  findValues(){
+  findValues() {
+    this.moreInfo = !this.moreInfo;
     this.findMaxValueTemp();
     this.findMaxValueHumd();
     this.findMinValueTemp();
     this.findMinValueHumd();
   }
 
-  findMaxValueTemp(){
+  findDates() {
+    this.minDate = this.hourChart.data.labels[0];
+    this.maxDate = this.hourChart.data.labels[this.hourChart.data.labels.length - 1];
+  }
+
+  findMaxValueTemp() {
     this.maxTemp = this.hourChart.data.datasets[0].data[0];
-    this.i=0;
-    for(this.i=1;this.i < this.hourChart.data.datasets[0].data.length;this.i++){
-      if(this.hourChart.data.datasets[0].data[this.i] > this.maxTemp){
-	      this.maxTemp = this.hourChart.data.datasets[0].data[this.i];
-	    }
+    this.i = 0;
+    for (this.i = 1; this.i < this.hourChart.data.datasets[0].data.length; this.i++) {
+      if (this.hourChart.data.datasets[0].data[this.i] > this.maxTemp) {
+        this.maxTemp = this.hourChart.data.datasets[0].data[this.i];
+      }
     }
   }
 
-  findMaxValueHumd(){
+  findMaxValueHumd() {
     this.maxHumd = this.hourChart.data.datasets[1].data[0];
-    this.i=0;
-    for(this.i=1;this.i < this.hourChart.data.datasets[0].data.length;this.i++){
-      if(this.hourChart.data.datasets[0].data[this.i] > this.maxHumd){
-	      this.maxHumd = this.hourChart.data.datasets[0].data[this.i];
-	    }
+    this.i = 0;
+    for (this.i = 1; this.i < this.hourChart.data.datasets[1].data.length; this.i++) {
+      if (this.hourChart.data.datasets[1].data[this.i] > this.maxHumd) {
+        this.maxHumd = this.hourChart.data.datasets[1].data[this.i];
+      }
     }
   }
 
-  findMinValueTemp(){
+  findMinValueTemp() {
     this.minTemp = this.hourChart.data.datasets[0].data[0];
-    this.i=0;
-    for(this.i=1;this.i < this.hourChart.data.datasets[0].data.length;this.i++){
-      if(this.hourChart.data.datasets[0].data[this.i] < this.minTemp){
-	      this.minTemp = this.hourChart.data.datasets[0].data[this.i];
-	    }
+    this.i = 0;
+    for (this.i = 1; this.i < this.hourChart.data.datasets[0].data.length; this.i++) {
+      if (this.hourChart.data.datasets[0].data[this.i] < this.minTemp) {
+        this.minTemp = this.hourChart.data.datasets[0].data[this.i];
+      }
     }
   }
 
-  findMinValueHumd(){
+  findMinValueHumd() {
     this.minHumd = this.hourChart.data.datasets[1].data[0];
-    this.i=0;
-    for(this.i=1;this.i < this.hourChart.data.datasets[0].data.length;this.i++){
-      if(this.hourChart.data.datasets[0].data[this.i] < this.minHumd){
-	      this.minHumd = this.hourChart.data.datasets[0].data[this.i];
-	    }
+    this.i = 0;
+    for (this.i = 1; this.i < this.hourChart.data.datasets[1].data.length; this.i++) {
+      if (this.hourChart.data.datasets[1].data[this.i] < this.minHumd) {
+        this.minHumd = this.hourChart.data.datasets[1].data[this.i];
+      }
     }
   }
 }

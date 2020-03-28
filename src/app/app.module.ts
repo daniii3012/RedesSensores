@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
+
+import localeEsCO from '@angular/common/locales/es-CO';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEsCO, 'es-CO');
 
 import { environment } from '../environments/environment.prod';
 
@@ -33,7 +37,7 @@ import { WeekChartComponent } from './components/week-chart/week-chart.component
     AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'es-CO' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

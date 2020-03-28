@@ -1,23 +1,45 @@
-<div class="col-md-6 offset-md-3">
-    <div class="card">
-        <div class="card-body">
-            <h1>Ultima Semana</h1>
+<div class="card">
+    <div class="card-body">
+        <div class="card-title">
+            <h5>{{ maxDate }} - {{ minDate }}</h5>
         </div>
-        <div class="card-body">
-            <button class="btn btn-info" (click)="findValues()">Valores</button>
-            <div id="dataTemp">
-                <p>MÁXIMO VALOR REGISTRADO TEMPERATURA: {{maxTemp}}</p>
-                <p>MENOR VALOR REGISTRADO TEMPERATURA: {{minTemp}}</p>
-            </div>
-            <div id="dataHumd">
-                <p>MÁXIMO VALOR REGISTRADO HUMEDAD: {{maxHumd}}</p>
-                <p>MENOR VALOR REGISTRADO HUMEDAD: {{minHumd}}</p>
-            </div>
+
+        <div class="mb-3">
+            <button class="btn btn-outline-info btn-sm" (click)="findValues()">Información</button>
         </div>
-        <div class="card-body">
-            <div *ngIf="weekChart" class="container">
-                <canvas id="weekChart">{{ weekChart }}</canvas>
-            </div>
+
+        <div *ngIf="moreInfo" class="mb-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Mínima</th>
+                        <th scope="col">Máxima</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Temperatura</th>
+                        <td>{{ minTemp | number: '2.2' }} °C</td>
+                        <td>{{ maxTemp | number: '2.2' }} °C</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Humedad</th>
+                        <td>{{ minHumd | number: '2.2' }} %</td>
+                        <td>{{ maxHumd | number: '2.2' }} %</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
+        <div *ngIf="weekChart" class="table-responsive">
+            <canvas id="weekChart" class="table" style="height: 300px">{{ weekChart }}</canvas>
+        </div>
+
+        <!--
+        <div *ngIf="weekChart" class="mt-5">
+            <canvas id="weekChart">{{ weekChart }}</canvas>
+        </div>
+        -->
     </div>
 </div>

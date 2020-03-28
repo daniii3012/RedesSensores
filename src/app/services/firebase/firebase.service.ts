@@ -17,6 +17,20 @@ export class FirebaseService {
     //this.sensorDHT22Collection = this.db.collection('dht22', order => order.orderBy("time", "desc").limit(12/*2016*/));
   }
 
+  getDataNow(){
+    return this.db.collection('dht22', order => order.orderBy("time", "desc").limit(1)).snapshotChanges().pipe(map(
+      actions => {
+        return actions.map(
+          a => {
+            const data = a.payload.doc.data() as any;
+            data.id = a.payload.doc.id;
+            return data;
+          }
+        )
+      }
+    ));
+  }
+
   
   getDataHour(){
     return this.db.collection('dht22', order => order.orderBy("time", "desc").limit(24)).snapshotChanges().pipe(map(
@@ -47,7 +61,7 @@ export class FirebaseService {
   }
 
   getDataWeek(){
-    return this.db.collection('dht22_week', order => order.orderBy("time", "desc").limit(7)).snapshotChanges().pipe(map(
+    return this.db.collection('dht22_week', order => order.orderBy("time", "desc").limit(28)).snapshotChanges().pipe(map(
       actions => {
         return actions.map(
           a => {
