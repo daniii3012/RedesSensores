@@ -61,7 +61,7 @@ export class FirebaseService {
   }
 
   getDataWeek(){
-    return this.db.collection('dht22_week', order => order.orderBy("time", "desc").limit(28)).snapshotChanges().pipe(map(
+    return this.db.collection('dht22_week', order => order.orderBy("time", "desc").limit(14)).snapshotChanges().pipe(map(
       actions => {
         return actions.map(
           a => {
