@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
 
   weatherNow: any;
 
-  hourChart: boolean = false;
+  hourChart: boolean = true;
   dayChart: boolean = false;
   weekChart: boolean = false;
 

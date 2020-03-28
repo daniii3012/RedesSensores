@@ -48,9 +48,9 @@ export class WeekChartComponent implements OnInit {
               {
                 data: temp,
                 yAxisID: 'temp',
-                borderColor: '#e6b41e',
+                borderColor: '#ffd024',
                 fill: true,
-                backgroundColor: '#e6b41e2a',
+                backgroundColor: '#ffd0242a',
                 label: 'Temperatura'
               },
               {
@@ -58,7 +58,7 @@ export class WeekChartComponent implements OnInit {
                 yAxisID: 'humd',
                 borderColor: '#148ac9',
                 fill: true,
-                backgroundColor: '#148ac92a',
+                backgroundColor: '#54A5D22a',
                 label: 'Humedad'
               }
             ]
@@ -103,7 +103,7 @@ export class WeekChartComponent implements OnInit {
                   //beginAtZero: true,
                   suggestedMin: 20,
                   suggestedMax: 80,
-                  fontColor: '#148ac9'
+                  fontColor: '#326A9A'
                 }
               }]
             }

@@ -1,0 +1,20 @@
+.bg-custom {
+    background: linear-gradient(#133467, #55A7D4)
+}
+
+.text-custom {
+    color: #3f3f3f;
+}
+
+.btn-outline-custom {
+    color: #55A7D4;
+    background-color: transparent;
+    background-image: none;
+    border-color: #55A7D4
+}
+
+.btn-outline-custom:hover {
+    color: #ffffff;
+    background-color: #55A7D4;
+    border-color: #55A7D4
+}

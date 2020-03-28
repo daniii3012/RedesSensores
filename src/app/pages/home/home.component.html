@@ -1,12 +1,19 @@
-<div class="container mt-3 mb-3">
-    <div class="card mb-3">
-        <div class="card-body">
-            <h3 class="card-title text-center">Centro de Monitoreo del Tiempo</h3>
+<div class="card mb-3" style="background: #133467; border-radius: 0;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-auto">
+                <img src="../../../assets/custom-icons/icon2.png" class="img-fluid" alt="weatherbog" style="height: 50px">
+            </div>
+            <div class="col text-left text-light">
+                <h3 class="card-title">Weather Bogotá</h3>
+            </div>
         </div>
     </div>
+</div>
+<div class="container mt-3 mb-3">
     <div class="row mb-3">
         <div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-3">
-            <div class="card">
+            <div class="card bg-custom text-light">
                 <div class="card-body" *ngIf="weatherNow">
                     <div class="row">
                         <div class="col-auto">
@@ -18,11 +25,11 @@
                     </div>
                     <div class="card-text">
                         <div class="row mb-2">
-                            <div class="col-2 text-center"><i class="fas fa-thermometer-half fa-2x" style="color: #b8b8b8;"></i></div>
+                            <div class="col-2 text-center"><i class="fas fa-thermometer-half fa-2x" style="color: #F9ED32;"></i></div>
                             <div class="col-10">{{ weatherNow[0].temp | number: '2.2' }} °C</div>
                         </div>
                         <div class="row">
-                            <div class="col-2 text-center"><i class="fas fa-tint fa-2x" style="color: #b8b8b8;"></i></div>
+                            <div class="col-2 text-center"><i class="fas fa-tint fa-2x" style="color: #59f5ed;"></i></div>
                             <div class="col-10">{{ weatherNow[0].humd | number: '2.2' }} %</div>
                         </div>
                     </div>
@@ -32,7 +39,7 @@
         <div class="col-lg-8 col-md-8 col-sm-12 col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
+                    <div class="row text-custom">
                         <div class="col-auto">
                             <h5 class="card-title">Ubicación</h5>
                         </div>
@@ -48,10 +55,13 @@
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-12 col-12 mb-3">
             <div class="card">
-                <div class="card-body text-center">
-                    <button (click)="showHourChart()" type="button" class="btn btn-outline-info btn-block">Ver última hora</button>
-                    <button (click)="showDayChart()" type="button" class="btn btn-outline-info btn-block">Ver último día</button>
-                    <button (click)="showWeekChart()" type="button" class="btn btn-outline-info btn-block">Ver última semana</button>
+                <div class="card-body">
+                    <h5 class="card-title text-custom">Historial</h5>
+                    <div class="card-text">
+                        <button (click)="showHourChart()" type="button" class="btn btn-outline-custom btn-block">Ver última hora</button>
+                        <button (click)="showDayChart()" type="button" class="btn btn-outline-custom btn-block">Ver último día</button>
+                        <button (click)="showWeekChart()" type="button" class="btn btn-outline-custom btn-block">Ver última semana</button>
+                    </div>
                 </div>
             </div>
         </div>

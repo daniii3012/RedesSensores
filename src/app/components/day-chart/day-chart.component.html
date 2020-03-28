@@ -1,14 +1,18 @@
 <div class="card">
-    <div class="card-body">
+    <div class="card-body text-custom">
         <div class="card-title">
             <h5>{{ maxDate }} - {{ minDate }}</h5>
         </div>
 
-        <div class="mb-3">
-            <button class="btn btn-outline-info btn-sm" (click)="findValues()">Información</button>
+        <div *ngIf="dayChart" class="table-responsive">
+            <canvas id="dayChart" class="table" style="height: 300px">{{ dayChart }}</canvas>
         </div>
 
-        <div *ngIf="moreInfo" class="mb-5">
+        <div class="mb-3">
+            <button class="btn btn-outline-custom btn-sm" (click)="findValues()">Información</button>
+        </div>
+
+        <div *ngIf="moreInfo">
             <table class="table">
                 <thead>
                     <tr>
@@ -30,10 +34,6 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-
-        <div *ngIf="dayChart" class="table-responsive">
-            <canvas id="dayChart" class="table" style="height: 300px">{{ dayChart }}</canvas>
         </div>
 
         <!--
