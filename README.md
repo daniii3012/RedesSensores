@@ -1,6 +1,11 @@
 # Sensorespi
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.   
+npm install  
+npm install firebase @angular/fire --save  
+ng add @angular/pwa  
+npm install chart.js --save  
+npm install mapbox-gl --save
 
 ## Development server
 
