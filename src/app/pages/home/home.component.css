@@ -18,3 +18,11 @@
     background-color: #55A7D4;
     border-color: #55A7D4
 }
+
+.btn-outline-custom:disabled {
+    color: #55A7D4;
+    background-color: transparent;
+    background-image: none;
+    border-color: #55A7D4;
+    cursor: default;
+}

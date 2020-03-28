@@ -58,9 +58,9 @@
                 <div class="card-body">
                     <h5 class="card-title text-custom">Historial</h5>
                     <div class="card-text">
-                        <button (click)="showHourChart()" type="button" class="btn btn-outline-custom btn-block">Ver última hora</button>
-                        <button (click)="showDayChart()" type="button" class="btn btn-outline-custom btn-block">Ver último día</button>
-                        <button (click)="showWeekChart()" type="button" class="btn btn-outline-custom btn-block">Ver última semana</button>
+                        <button (click)="showHourChart()" type="button" class="btn btn-outline-custom btn-block" [disabled]="hourChart">Ver última hora</button>
+                        <button (click)="showDayChart()" type="button" class="btn btn-outline-custom btn-block" [disabled]="dayChart">Ver último día</button>
+                        <button (click)="showWeekChart()" type="button" class="btn btn-outline-custom btn-block" [disabled]="weekChart">Ver última semana</button>
                     </div>
                 </div>
             </div>
