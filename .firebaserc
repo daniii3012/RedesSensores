@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "raspberry-pi-sensores"
+  },
+  "targets": {
+    "raspberry-pi-sensores": {
+      "hosting": {
+        "weatherbog": [
+          "weatherbog"
+        ]
+      }
+    }
   }
 }
